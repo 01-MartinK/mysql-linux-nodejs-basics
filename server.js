@@ -12,17 +12,10 @@ connection.connect(function(err) {
   
     console.log('Connected!');
 
-    var sql = "INSERT INTO teachers (id,name,address) VALUES (4,'Kevin', 'Tallinn')";
+    var sql = "UPDATE teachers SET address = 'Elva' WHERE id='1'";
     connection.query(sql, (err, result) => {
         if (err) throw err;
-        console.log("4. record inserted");
+        console.log("updated value");
+        console.log(result)
     });
-
-    sql = "DELETE FROM teachers WHERE id = 2"
-
-    connection.query(sql, (err, result) => {
-        if (err) throw err;
-        console.log(result);
-    });
-
   });
