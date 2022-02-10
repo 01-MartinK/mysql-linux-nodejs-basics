@@ -12,10 +12,27 @@ connection.connect(function(err) {
   
     console.log('Connected!');
 
-    var sql = "UPDATE teachers SET address = 'Elva' WHERE id='1'";
+    /*
+    var sql = "CREATE TABLE SCHOOLS(id int, name VARCHAR(128), teacher_id int)";
     connection.query(sql, (err, result) => {
         if (err) throw err;
-        console.log("updated value");
-        console.log(result)
+        console.log("Created another Table");
+    });
+    */
+
+    sql = "INSERT INTO SCHOOLS(id,name,teacher_id) VALUES (1,'elva gümnaasium','3')"
+    connection.query(sql, (err, result) => {
+        if (err) throw err;
+        console.log("Inserted value");
+    });
+    sql = "INSERT INTO SCHOOLS(id,name,teacher_id) VALUES (2,'tallinna polütehnika','4')"
+    connection.query(sql, (err, result) => {
+        if (err) throw err;
+        console.log("Inserted value");
+    });
+    sql = "INSERT INTO SCHOOLS(id,name,teacher_id) VALUES (3,'tartu vocational educational college','1')"
+    connection.query(sql, (err, result) => {
+        if (err) throw err;
+        console.log("Inserted value");
     });
   });
