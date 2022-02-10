@@ -12,13 +12,13 @@ connection.connect(function(err) {
   
     console.log('Connected!');
 
-    var sql = "INSERT INTO teachers (id,name,address) VALUES (2,'Carolin', 'Annelinn')";
+    var sql = "INSERT INTO teachers (id,name,address) VALUES (3,'Uncle', 'Tallinn')";
     connection.query(sql, (err, result) => {
         if (err) throw err;
-        console.log("2. record inserted");
+        console.log("3. record inserted");
     });
 
-    sql = "SELECT * FROM teachers where id=2"
+    sql = "SELECT * FROM teachers ORDER BY id DESC"
 
     connection.query(sql, (err, result) => {
         if (err) throw err;
