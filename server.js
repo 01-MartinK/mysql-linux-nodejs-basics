@@ -12,7 +12,7 @@ connection.connect(function(err) {
   
     console.log('Connected!');
 
-    var sql = "SELECT * FROM SCHOOLS LIMIT 1";
+    var sql = "SELECT SCHOOLS.teacher_id, teachers.name FROM SCHOOLS JOIN teachers ON SCHOOLS.teacher_id=teachers.id";
     connection.query(sql, (err, result) => {
         if (err) throw err;
         console.log(result);
