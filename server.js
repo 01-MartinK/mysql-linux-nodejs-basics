@@ -12,9 +12,10 @@ connection.connect(function(err) {
   
     console.log('Connected!');
 
-    var sql = "SELECT SCHOOLS.teacher_id, teachers.name FROM SCHOOLS JOIN teachers ON SCHOOLS.teacher_id=teachers.id";
+    var sql = "DROP TABLE SCHOOLS";
     connection.query(sql, (err, result) => {
         if (err) throw err;
         console.log(result);
+        console.log("Table dropped");
     });
   });
