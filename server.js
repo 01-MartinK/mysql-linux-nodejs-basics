@@ -12,9 +12,17 @@ connection.connect(function(err) {
   
     console.log('Connected!');
 
-    var sql = "CREATE TABLE teachers (id int, name VARCHAR(32), address VARCHAR(120))";
+    var sql = "INSERT INTO teachers (id,name,address) VALUES (1,'Anna Karutina', 'Tartu vocational educational college')";
     connection.query(sql, (err, result) => {
         if (err) throw err;
-        console.log("Table created");
+        console.log("1 records inserted");
     });
+
+    sql = "SELECT * FROM teachers"
+
+    connection.query(sql, (err, result) => {
+        if (err) throw err;
+        console.log(result);
+    });
+
   });
