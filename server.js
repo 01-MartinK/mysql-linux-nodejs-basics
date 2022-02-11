@@ -1,3 +1,4 @@
+
 const express = require('express');
 const app = express();
 
@@ -8,11 +9,11 @@ const mysql = require('mysql');
 const hbs = require('express-handlebars');
 
 app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', hbs.engine);
+app.set('view engine', 'hbs');
 app.engine('hbs', hbs.engine({
     extname: 'hbs',
     defaultLayout: 'main',
-    layoutsDir: __dirname+'/views/layouts/',
+    layoutsDir: __dirname+'/views/layouts/'
 }));
 
 app.use(express.static('public'));
@@ -24,13 +25,25 @@ var con = mysql.createConnection({
     host     : 'localhost',
     user     : 'root',
     password : '778Iv23N',
-    database: "oop_test"
+    database: "yoga_mysql"
 });
 
 con.connect(function(err) {
     if (err) throw err;
   
     console.log('Connected to yoga_mysql db');
+});
+
+app.get('/', (req, res) => {
+    let query = "SELECT * FROM article";
+    let articles = [];
+    con.query(query, (err, result) => {
+        if (err) throw err;
+        articles = result;
+        res.render('index', {
+            articles: articles
+        });
+    });
 });
 
 app.listen(3000, () => {
