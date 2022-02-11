@@ -5,6 +5,18 @@ const path = require('path');
 
 const mysql = require('mysql');
 
+const hbs = require('express-handlebars');
+
+app.set('views', path.join(__dirname, 'views'));
+app.set('view engine', hbs.engine);
+app.engine('hbs', hbs.engine({
+    extname: 'hbs',
+    defaultLayout: 'main',
+    layoutsDir: __dirname+'/views/layouts/',
+}));
+
+app.use(express.static('public'));
+
 const bodyParser = require('body-parser');
 app.use(bodyParser.urlencoded({extended: true}));
 
