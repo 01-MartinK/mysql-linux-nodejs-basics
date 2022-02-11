@@ -34,30 +34,10 @@ con.connect(function(err) {
     console.log('Connected to yoga_mysql db');
 });
 
-app.get('/', (req, res) => {
-    let query = "SELECT * FROM article";
-    let articles = [];
-    con.query(query, (err, result) => {
-        if (err) throw err;
-        articles = result;
-        res.render('index', {
-            articles: articles
-        });
-    });
-});
+const articleRoutes = require('./routers/article');
 
-app.get('/article/:slug', (req, res) => {
-    let query = `SELECT *, author.name as author_name, article.name as article_name FROM article JOIN author ON article.author_id=author.id WHERE slug="${req.params.slug}"`;
-    let article;
-    con.query(query, (err, result) => {
-        if (err) throw err;
-        article = result;
-        console.log(article)
-        res.render('article', {
-            article: article
-        });
-    });
-});
+app.use('/', articleRoutes);
+app.use('/article', articleRoutes);
 
 app.get('/author/:id', (req, res) => {
     let query = `SELECT * FROM author WHERE id=${req.params.id}`;
