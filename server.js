@@ -1,21 +1,26 @@
-let mysql = require('mysql');
+const express = require('express');
+const app = express();
 
-let connection = mysql.createConnection({
+const path = require('path');
+
+const mysql = require('mysql');
+
+const bodyParser = require('body-parser');
+app.use(bodyParser.urlencoded({extended: true}));
+
+var con = mysql.createConnection({
     host     : 'localhost',
     user     : 'root',
     password : '778Iv23N',
     database: "oop_test"
 });
 
-connection.connect(function(err) {
+con.connect(function(err) {
     if (err) throw err;
   
-    console.log('Connected!');
+    console.log('Connected to yoga_mysql db');
+});
 
-    var sql = "DROP TABLE SCHOOLS";
-    connection.query(sql, (err, result) => {
-        if (err) throw err;
-        console.log(result);
-        console.log("Table dropped");
-    });
-  });
+app.listen(3000, () => {
+    console.log('App started at localhost:3000')
+});
